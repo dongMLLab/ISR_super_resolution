@@ -9,11 +9,15 @@ def run_main(weights: str, fileName: str, client):
     if weights not in usable_weights:
         print("Please select usable weights.: {}".format(*usable_weights))
 
-        return False
+        return fileName
 
     if weights == "gans":
         generate_gans(weights, fileName, client)
+
+        return fileName
     
     else:
         generate_psnr(weights, fileName, client)
+
+        return fileName
     
