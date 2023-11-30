@@ -17,9 +17,10 @@ def main():
     image_dir = os.listdir("./img")
 
     for i in image_dir:
+        print(i[-2:])
     # /00037-3574770352.jpg
-        if i[:-2] == "md":
-            print("Pass Not Image file: {}".format(i[:-2]))
+        if i[-2:] == "md":
+            print("Pass Not Image file: {}".format(i[-2:]))
             pass
 
         if weights == "gans":
