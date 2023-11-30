@@ -1,0 +1,22 @@
+---
+version: '3.7'
+services:
+  app:
+    build: 
+      dockerfile: Dockerfile
+      context: .
+    container_name: sr
+    expose:
+      - 5000
+    # ports:
+    #   - 5000:5000
+    volumes:
+      - ./img:/app/img
+      - ./results:/app/results
+
+    restart: unless-stopped
+    networks:
+      - proxy
+networks:
+  proxy:
+    external: true
