@@ -5,3 +5,8 @@
 
 ## Purpose
 - Super Resolution on images
+
+## Weights
+- psnr-small
+- psnr-large
+- noise-cancel
