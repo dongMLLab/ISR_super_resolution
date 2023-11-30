@@ -1,2 +1,7 @@
 torchvision
 torch
+numpy==1.26.2
+pandas
+tensorflow==2.15.0
+h5py==3.10.0
+pandas==2.1.3
