@@ -1,0 +1,5 @@
+img/*
+results/*
+.DS_Store
+log_file
+__pycache__
