@@ -3,21 +3,19 @@ import numpy as np
 from PIL import Image
 import os
 
-image_dir = os.listdir("./img")
+def generate_gans(weights: str, fileName: str):
 
-for i in image_dir:
-    if i[:-2] == "md":
-        print("Pass Not Image file: {}".format(i[:-2]))
-        pass
 # /00037-3574770352.jpg
-    img = Image.open('./img/'+i)
+    img = Image.open('./img/'+fileName)
 
     lr_img = np.array(img)
 
-    rrdn = RRDN(weights='gans')
+    rrdn = RRDN(weights=weights)
 
     sr_img = rrdn.predict(lr_img)
     image = Image.fromarray(sr_img)
 
-    image.save("results/gan/"+"gans_"+i)
-    print("Resolution Finished: {}".format(i))
+    image.save("results/gan/"+"gans_"+fileName)
+    print("Resolution Finished: {}".format(fileName))
+    
+    return fileName

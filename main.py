@@ -1,26 +1,31 @@
-from ISR.models import RDN
-import numpy as np
-from PIL import Image
 import os
 
-image_dir = os.listdir("./img")
+from gan import generate_gans
+from psnr import generate_psnr
 
-for i in image_dir:
-# /00037-3574770352.jpg
-    if i[:-2] == "md":
-        print("Pass Not Image file: {}".format(i[:-2]))
-        pass
-    img = Image.open('./img/'+i)
 
-    lr_img = np.array(img)
 
-    # psnr-large, psnr-small, noise-cancel
+def main():
+    usable_weights = ['psnr-large', 'psnr-small', 'noise-cancel', 'gans']
 
-    weights = "psnr-large"
-    rdn = RDN(weights=weights)
+    weights = input("Please select weights: 'psnr-large', 'psnr-small', 'noise-cancel', 'gans': ")
 
-    sr_img = rdn.predict(lr_img)
-    image = Image.fromarray(sr_img)
+    if weights not in usable_weights:
+        print("Please select usable weights.: {}".format(*usable_weights))
+        return False
+    
+    image_dir = os.listdir("./img")
 
-    image.save("results/isr/" + weights +"_" + i)
-    print("Resolution Finished: {}".format(i))
+    for i in image_dir:
+    # /00037-3574770352.jpg
+        if i[:-2] == "md":
+            print("Pass Not Image file: {}".format(i[:-2]))
+            pass
+
+        if weights == "gans":
+            generate_gans(weights, i)
+        
+        else:
+            generate_psnr(weights, i)
+
+main()
