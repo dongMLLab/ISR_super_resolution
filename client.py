@@ -36,14 +36,27 @@ class MinioClient:
 
         return response
 
-    
+    def get_image_file(self, bucket_name: str, file_name: str, version_id: str):
+        print("versionId: {}".format(version_id))
+
+        print("FileName:{}".format(file_name))
+
+        response = self.client.fget_object(
+            bucket_name = bucket_name, 
+            object_name = file_name,
+            file_path="/app/results/",
+            version_id = version_id
+        )
+
+        return response
+       
     def upload_data_file(self, bucketName: str, fileName: str, file_path: str):
         response = self.client.fput_object(bucketName, fileName, file_path, content_type='application/csv')
         
         return response
 
     def upload_visualize_file(self, bucketName: str, fileName: str, image_path: str):
-        response = self.client.fput_object(bucketName, fileName, image_path, content_type="image/jpeg")
+        response = self.client.fput_object(bucketName, fileName, image_path, content_type="image/png")
         
         return response
 

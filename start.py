@@ -4,7 +4,7 @@ from gan import generate_gans
 from psnr import generate_psnr
 
 
-def main():
+def start():
     usable_weights = ['psnr-large', 'psnr-small', 'noise-cancel', 'gans']
 
     weights = input("Please select weights: 'psnr-large', 'psnr-small', 'noise-cancel', 'gans': ")
@@ -32,4 +32,4 @@ def main():
         else:
             print("Pass")
 
-main()
+start()

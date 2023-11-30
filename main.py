@@ -1,7 +1,11 @@
 import warnings
+from client import MinioClient
+from dto.upload import UploadRequestDto
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi import FastAPI, Request
 from minio import S3Error
+
+from lib.run import run_main
 
 warnings.filterwarnings(action='ignore')
 
@@ -14,10 +18,20 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+client = MinioClient()
 
 @app.router.post("/resolution")
-def super_resolution(request):
+def super_resolution(request: UploadRequestDto):
     try:
-        print()
+        weights, fileName, versionId = request
+
+        print("Request: {}".format(request.fileName))
+
+        client.get_image_file("raw", fileName, versionId)
+
+        run_main(weights, fileName, client)
+
+        return "success"
+
     except Exception as e:
         print(e)

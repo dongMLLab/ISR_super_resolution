@@ -11,3 +11,9 @@
 - psnr-large
 - noise-cancel
 - gans
+
+## Usage
+
+``` zsh
+    python start.py
+```

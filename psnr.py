@@ -3,7 +3,7 @@ import numpy as np
 from PIL import Image
 import os
 
-def generate_psnr(weights: str, fileName: str):
+def generate_psnr(weights: str, fileName: str, client):
     img = Image.open('./img/'+fileName)
 
     lr_img = np.array(img)
@@ -17,6 +17,13 @@ def generate_psnr(weights: str, fileName: str):
     image = Image.fromarray(sr_img)
 
     image.save("results/isr/" + weights +"_" + fileName)
+
+    client.upload_visualize_file(
+        "resolution", 
+        fileName,
+        "results/isr/" + weights +"_" + fileName
+    )
+    
     print("Resolution Finished: {}".format(fileName))
 
     return fileName
