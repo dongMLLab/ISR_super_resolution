@@ -10,3 +10,4 @@
 - psnr-small
 - psnr-large
 - noise-cancel
+- gans
