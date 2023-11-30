@@ -23,10 +23,14 @@ def main():
             print("Pass Not Image file: {}".format(i[-2:]))
             pass
 
-        if weights == "gans":
-            generate_gans(weights, i)
+        if i[-2:]:
+            if weights == "gans":
+                generate_gans(weights, i)
+            
+            else:
+                generate_psnr(weights, i)
         
         else:
-            generate_psnr(weights, i)
+            print("Pass")
 
 main()
