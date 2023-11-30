@@ -4,7 +4,6 @@ from gan import generate_gans
 from psnr import generate_psnr
 
 
-
 def main():
     usable_weights = ['psnr-large', 'psnr-small', 'noise-cancel', 'gans']
 
