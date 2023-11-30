@@ -1,0 +1,1 @@
+# Raw Image Data Folder

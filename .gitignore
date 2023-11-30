@@ -1,5 +1,7 @@
-img/*
-results/*
+*.png
+*.jpg
+*.jpeg
+
 .DS_Store
 log_file
 __pycache__
