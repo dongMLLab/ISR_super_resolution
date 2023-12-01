@@ -22,6 +22,9 @@ minio_endpoint = os.getenv("MINIO_ENDPOINT")
 minio_access = os.getenv("MINIO_ACCESSKEY")
 minio_secret = os.getenv("MINIO_SECRET")
 
+print("minio_scret: {}".format(minio_secret))
+print("Endpoint: {}".format(minio_endpoint))
+
 client = MinioClient(
     minio_endpoint,
     minio_access,
