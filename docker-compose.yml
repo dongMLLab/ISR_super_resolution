@@ -13,7 +13,6 @@ services:
     volumes:
       - ./img:/app/img
       - ./results:/app/results
-
     restart: unless-stopped
     networks:
       - proxy
