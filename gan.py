@@ -20,8 +20,8 @@ def generate_gans(weights: str, fileName: str, client):
     
     new_version_id = client.upload_visualize_file(
         "resolution",
-        fileName,
+        "gans_"+fileName,
         "results/gan/"+"gans_"+fileName,
     )
 
-    return new_version_id
+    return "gans_"+fileName, new_version_id

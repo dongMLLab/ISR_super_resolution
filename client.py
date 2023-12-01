@@ -57,7 +57,9 @@ class MinioClient:
 
     def upload_visualize_file(self, bucketName: str, fileName: str, image_path: str):
         response = self.client.fput_object(bucketName, fileName, image_path, content_type="image")
+
         super_resoluted_version_id = response.version_id
+        print("New Version Id: {}".format(super_resoluted_version_id))
 
         return super_resoluted_version_id
 

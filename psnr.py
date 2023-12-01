@@ -20,10 +20,10 @@ def generate_psnr(weights: str, fileName: str, client):
 
     new_version_id = client.upload_visualize_file(
         "resolution", 
-        fileName,
+        weights +"_" + fileName,
         "results/isr/" + weights +"_" + fileName
     )
     
     print("Resolution Finished: {}".format(new_version_id))
 
-    return new_version_id
+    return weights +"_" + fileName, new_version_id
