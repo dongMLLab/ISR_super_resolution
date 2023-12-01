@@ -29,11 +29,11 @@ def super_resolution(request: UploadRequestDto):
 
         client.get_image_file("raw", fileName, versionId)
 
-        result = run_main(weights, fileName, client)
+        new_version_id = run_main(weights, fileName, client)
 
-        print("Result File Name: {}".format(result))
+        print("Result File Name: {}".format(new_version_id))
 
-        return "success"
-
+        return new_version_id
+    
     except Exception as e:
         print(e)

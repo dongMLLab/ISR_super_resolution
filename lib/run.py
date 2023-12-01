@@ -12,12 +12,12 @@ def run_main(weights: str, fileName: str, client):
         return fileName
 
     if weights == "gans":
-        generate_gans(weights, fileName, client)
+        new_version_id= generate_gans(weights, fileName, client)
 
-        return fileName
+        return new_version_id
     
     else:
-        generate_psnr(weights, fileName, client)
+        new_version_id = generate_psnr(weights, fileName, client)
 
-        return fileName
+        return new_version_id
     

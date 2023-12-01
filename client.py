@@ -56,9 +56,10 @@ class MinioClient:
         return response
 
     def upload_visualize_file(self, bucketName: str, fileName: str, image_path: str):
-        response = self.client.fput_object(bucketName, fileName, image_path, content_type="image/png")
-        
-        return response
+        response = self.client.fput_object(bucketName, fileName, image_path, content_type="image")
+        super_resoluted_version_id = response.version_id
+
+        return super_resoluted_version_id
 
 # client = MinioClient(
 #     endpoint="file-dev.andongh.com",

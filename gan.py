@@ -18,10 +18,10 @@ def generate_gans(weights: str, fileName: str, client):
     image.save("results/gan/"+"gans_"+fileName)
     print("Resolution Finished: {}".format(fileName))
     
-    client.upload_visualize_file(
+    new_version_id = client.upload_visualize_file(
         "resolution",
         fileName,
         "results/gan/"+"gans_"+fileName,
     )
 
-    return fileName
+    return new_version_id
