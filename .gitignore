@@ -7,3 +7,4 @@ log_file
 __pycache__
 
 .env
+run.sh

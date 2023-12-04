@@ -5,7 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi import FastAPI
 import os
 from lib.run import run_main
-import urllib3
+from dotenv import load_dotenv
 
 warnings.filterwarnings(action='ignore')
 
@@ -18,16 +18,18 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+load_dotenv( verbose=True)
+
 minio_endpoint = os.getenv("MINIO_ENDPOINT")
 minio_access = os.getenv("MINIO_ACCESSKEY")
 minio_secret = os.getenv("MINIO_SECRET")
 
+print("Endpoint: {}".format(minio_endpoint))
+
 client = MinioClient(
+    endpoint=minio_endpoint,
     access_key=minio_access,
     secret_key=minio_secret,
-        http_client=urllib3.ProxyManager(
-        minio_endpoint,
-        timeout=urllib3.Timeout.DEFAULT_TIMEOUT,)
 )
 
 @app.router.post("/resolution")
