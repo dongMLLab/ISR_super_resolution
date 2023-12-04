@@ -32,3 +32,5 @@ def generate_psnr(weights: str, fileName: str, client):
         return weights +"_" + fileName, new_version_id
     except Exception as e:
         print(e)
+
+        return e

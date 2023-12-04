@@ -51,4 +51,5 @@ def super_resolution(request: UploadRequestDto):
         }
     
     except Exception as e:
+        print(e)
         return e

@@ -29,3 +29,5 @@ def generate_gans(weights: str, fileName: str, client):
         return "gans_"+fileName, new_version_id
     except Exception as e:
         print(e)
+
+        return e
