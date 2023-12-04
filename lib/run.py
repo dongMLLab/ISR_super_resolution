@@ -1,5 +1,3 @@
-import os
-
 from gan import generate_gans
 from psnr import generate_psnr
 

@@ -1,7 +1,6 @@
 from ISR.models import RRDN
 import numpy as np
 from PIL import Image
-import os
 
 def generate_gans(weights: str, fileName: str, versionId: str, client):
     try :
