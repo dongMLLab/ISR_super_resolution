@@ -13,6 +13,7 @@ services:
     volumes:
       - ./img:/app/img
       - ./results:/app/results
+      - ./sr_models:/app/sr_models
     restart: unless-stopped
     env_file:
       - .env
