@@ -22,9 +22,6 @@ minio_endpoint = os.getenv("MINIO_ENDPOINT")
 minio_access = os.getenv("MINIO_ACCESSKEY")
 minio_secret = os.getenv("MINIO_SECRET")
 
-print("minio_scret: {}".format(minio_secret))
-print("Endpoint: {}".format(minio_endpoint))
-
 client = MinioClient(
     minio_endpoint,
     minio_access,
@@ -36,11 +33,11 @@ def super_resolution(request: UploadRequestDto):
     try:
         weights, fileName, versionId = request
 
-        print("Request: {}".format(request.fileName))
+        print("weights: {}, fileName: {}, version_id: {}".format(weights, fileName, versionId))
 
-        client.get_image_file("raw", fileName, versionId)
+        client.get_image_file("raw", request.fileName, request.versionId)
 
-        new_fileName, new_version_id = run_main(weights, fileName, client)
+        new_fileName, new_version_id = run_main(request.weights, request.fileName, client)
 
         print("Result File Name: {}".format(new_version_id))
 
