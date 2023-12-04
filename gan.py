@@ -3,11 +3,14 @@ import numpy as np
 from PIL import Image
 import os
 
-def generate_gans(weights: str, fileName: str, client):
+def generate_gans(weights: str, fileName: str, versionId: str, client):
     try :
         print("Start Generating Gans Method")
+
+        data = client.get_image_file("raw", fileName, versionId)
+
     # /00037-3574770352.jpg
-        img = Image.open('/app/img/'+fileName)
+        img = Image.open(data)
 
         lr_img = np.array(img)
 

@@ -3,7 +3,7 @@ import os
 from gan import generate_gans
 from psnr import generate_psnr
 
-def run_main(weights: str, fileName: str, client):
+def run_main(weights: str, fileName: str, versionId: str, client):
     try:
         print("Run Main")
         usable_weights = ['psnr-large', 'psnr-small', 'noise-cancel', 'gans']
@@ -14,7 +14,7 @@ def run_main(weights: str, fileName: str, client):
             return fileName
 
         if weights == "gans":
-            new_fileName, new_version_id= generate_gans(weights, fileName, client)
+            new_fileName, new_version_id= generate_gans(weights, fileName, versionId,client)
 
             return new_fileName, new_version_id
         

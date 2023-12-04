@@ -39,9 +39,7 @@ def super_resolution(request: UploadRequestDto):
 
         print("weights: {}, fileName: {}, version_id: {}".format(weights, fileName, versionId))
 
-        client.get_image_file("raw", request.fileName, request.versionId)
-
-        new_fileName, new_version_id = run_main(request.weights, request.fileName, client)
+        new_fileName, new_version_id = run_main(request.weights, request.fileName, request.versionId, client)
 
         print("Result File Name: {}".format(new_version_id))
 

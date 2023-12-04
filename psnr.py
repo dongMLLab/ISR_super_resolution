@@ -3,11 +3,13 @@ import numpy as np
 from PIL import Image
 import os
 
-def generate_psnr(weights: str, fileName: str, client):
+def generate_psnr(weights: str, fileName: str, versionId: str, client):
     try :
         print("Start Generating PSNR Method: {}".format(weights))
 
-        img = Image.open('/app/img/'+fileName)
+        data = client.get_image_file("raw", fileName, versionId)
+
+        img = Image.open(data)
 
         lr_img = np.array(img)
 
