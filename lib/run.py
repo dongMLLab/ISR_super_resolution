@@ -19,7 +19,7 @@ def run_main(weights: str, fileName: str, versionId: str, client):
             return new_fileName, new_version_id
         
         else:
-            new_fileName, new_version_id = generate_psnr(weights, fileName, client)
+            new_fileName, new_version_id = generate_psnr(weights, fileName, versionId,client)
 
             return new_fileName, new_version_id
     except Exception as e:
