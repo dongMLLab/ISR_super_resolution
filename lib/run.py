@@ -11,7 +11,7 @@ def run_main(weights: str, fileName: str, versionId: str, client):
         if weights not in usable_weights:
             print("Please select usable weights.: {}".format(*usable_weights))
 
-            return fileName
+            return fileName, "No Weight Usable"
 
         if weights == "gans":
             new_fileName, new_version_id= generate_gans(weights, fileName, versionId,client)
