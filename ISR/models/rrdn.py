@@ -1,7 +1,7 @@
 import tensorflow as tf
-from tensorflow.keras.initializers import RandomUniform
-from tensorflow.keras.layers import concatenate, Input, Activation, Add, Conv2D, Lambda
-from tensorflow.keras.models import Model
+from keras.initializers import RandomUniform
+from keras.layers import concatenate, Input, Activation, Add, Conv2D, Lambda
+from keras.models import Model
 
 from ISR.models.imagemodel import ImageModel
 
@@ -9,7 +9,7 @@ WEIGHTS_URLS = {
     'gans': {
         'arch_params': {'C': 4, 'D': 3, 'G': 32, 'G0': 32, 'x': 4, 'T': 10},
         'url': 'https://public-asai-dl-models.s3.eu-central-1.amazonaws.com/ISR/rrdn-C4-D3-G32-G032-T10-x4-GANS/rrdn-C4-D3-G32-G032-T10-x4_epoch299.hdf5',
-        'name': 'rrdn-C4-D3-G32-G032-T10-x4_epoch299.hdf5',
+        'name': '/app/models/gan/rrdn-C4-D3-G32-G032-T10-x4_epoch299.hdf5',
     },
 }
 
