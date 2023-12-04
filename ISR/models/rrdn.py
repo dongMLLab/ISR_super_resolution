@@ -89,7 +89,7 @@ class RRDN(ImageModel):
         self.name = 'rrdn'
         if weights:
             print("fname: {}".format(fname))
-            self.model = load_model(fname)
+            self.model.load_weights(fname)
             # weights_path = tf.keras.utils.get_file(fname=fname, origin=url)
             # self.model.load_weights(weights_path)
     
