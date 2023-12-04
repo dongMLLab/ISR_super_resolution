@@ -54,7 +54,7 @@ class MinioClient:
             response = self.client.fget_object(
                 bucket_name = bucket_name, 
                 object_name = file_name,
-                path=file_name,
+                file_path=file_name,
                 version_id = version_id
             )
 
