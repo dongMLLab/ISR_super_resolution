@@ -51,10 +51,9 @@ class MinioClient:
 
             print("FileName:{}".format(file_name))
 
-            response = self.client.fget_object(
+            response = self.client.get_object(
                 bucket_name = bucket_name, 
                 object_name = file_name,
-                file_path="/app/img/"+file_name,
                 version_id = version_id
             )
 
