@@ -14,7 +14,7 @@ def run_main(weights: str, fileName: str, versionId: str, client):
             return fileName, "No Weight Usable"
 
         if weights == "gans":
-            new_fileName, new_version_id= generate_gans(weights, fileName, versionId,client)
+            new_fileName, new_version_id = generate_gans(weights, fileName, versionId,client)
 
             return new_fileName, new_version_id
         
