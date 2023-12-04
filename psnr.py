@@ -4,26 +4,31 @@ from PIL import Image
 import os
 
 def generate_psnr(weights: str, fileName: str, client):
-    img = Image.open('./img/'+fileName)
+    try :
+        print("Start Generating PSNR Method: {}".format(weights))
 
-    lr_img = np.array(img)
+        img = Image.open('/app/img/'+fileName)
 
-    # psnr-large, psnr-small, noise-cancel
+        lr_img = np.array(img)
 
-    # weights = "psnr-large"
-    rdn = RDN(weights=weights)
+        # psnr-large, psnr-small, noise-cancel
 
-    sr_img = rdn.predict(lr_img)
-    image = Image.fromarray(sr_img)
+        # weights = "psnr-large"
+        rdn = RDN(weights=weights)
 
-    image.save("results/isr/" + weights +"_" + fileName)
+        sr_img = rdn.predict(lr_img)
+        image = Image.fromarray(sr_img)
 
-    new_version_id = client.upload_visualize_file(
-        "resolution", 
-        weights +"_" + fileName,
-        "results/isr/" + weights +"_" + fileName
-    )
-    
-    print("Resolution Finished: {}".format(new_version_id))
+        image.save("/app/results/isr/" + weights +"_" + fileName)
 
-    return weights +"_" + fileName, new_version_id
+        new_version_id = client.upload_visualize_file(
+            "resolution", 
+            weights +"_" + fileName,
+            "/app/results/isr/" + weights +"_" + fileName
+        )
+        
+        print("Resolution Finished: {}".format(new_version_id))
+
+        return weights +"_" + fileName, new_version_id
+    except Exception as e:
+        print(e)

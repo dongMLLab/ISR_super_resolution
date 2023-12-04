@@ -44,9 +44,11 @@ class MinioClient:
         response = self.client.fget_object(
             bucket_name = bucket_name, 
             object_name = file_name,
-            file_path="/app/results/",
+            file_path="/app/img",
             version_id = version_id
         )
+
+        print("Saved Image")
 
         return response
        
