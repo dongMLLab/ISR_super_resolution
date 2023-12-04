@@ -2,10 +2,10 @@ import warnings
 from client import MinioClient
 from dto.upload import UploadRequestDto
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi import FastAPI, Request
-from minio import S3Error
+from fastapi import FastAPI
 import os
 from lib.run import run_main
+import urllib3
 
 warnings.filterwarnings(action='ignore')
 
@@ -23,9 +23,11 @@ minio_access = os.getenv("MINIO_ACCESSKEY")
 minio_secret = os.getenv("MINIO_SECRET")
 
 client = MinioClient(
-    minio_endpoint,
-    minio_access,
-    minio_secret
+    access_key=minio_access,
+    secret_key=minio_secret,
+        http_client=urllib3.ProxyManager(
+        minio_endpoint,
+        timeout=urllib3.Timeout.DEFAULT_TIMEOUT,)
 )
 
 @app.router.post("/resolution")
@@ -47,4 +49,4 @@ def super_resolution(request: UploadRequestDto):
         }
     
     except Exception as e:
-        print(e)
+        return e
