@@ -3,21 +3,27 @@ import numpy as np
 from PIL import Image
 import os
 
+<<<<<<< HEAD
 def generate_psnr(weights: str, fileName: str):
     img = Image.open('./img/'+fileName)
+=======
+def generate_psnr(weights: str, fileName: str, versionId: str, client):
+    try :
+        print("Start Generating PSNR Method: {}".format(weights))
+>>>>>>> 39b4f0fb7038c2a070615acf696ec5251082fa31
 
-    lr_img = np.array(img)
+        data = client.get_image_file("raw", fileName, versionId)
 
-    # psnr-large, psnr-small, noise-cancel
+        img = Image.open(data)
 
-    # weights = "psnr-large"
-    rdn = RDN(weights=weights)
+        lr_img = np.array(img)
 
-    sr_img = rdn.predict(lr_img)
-    image = Image.fromarray(sr_img)
+        # psnr-large, psnr-small, noise-cancel
 
-    image.save("results/isr/" + weights +"_" + fileName)
+        # weights = "psnr-large"
+        rdn = RDN(weights=weights)
 
+<<<<<<< HEAD
     # new_version_id = client.upload_visualize_file(
     #     "resolution", 
     #     weights +"_" + fileName,
@@ -26,3 +32,23 @@ def generate_psnr(weights: str, fileName: str):
     
 
     return weights +"_" + fileName
+=======
+        sr_img = rdn.predict(lr_img)
+        image = Image.fromarray(sr_img)
+
+        image.save("/app/results/isr/" + weights +"_" + fileName)
+
+        new_version_id = client.upload_visualize_file(
+            "resolution", 
+            weights +"_" + fileName,
+            "/app/results/isr/" + weights +"_" + fileName
+        )
+        
+        print("Resolution Finished: {}".format(new_version_id))
+
+        return weights +"_" + fileName, new_version_id
+    except Exception as e:
+        print(e)
+
+        return e
+>>>>>>> 39b4f0fb7038c2a070615acf696ec5251082fa31
