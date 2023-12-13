@@ -2,13 +2,9 @@ from ISR.models import RRDN
 import numpy as np
 from PIL import Image
 
-<<<<<<< HEAD
-def generate_gans(weights: str, fileName: str):
-=======
 def generate_gans(weights: str, fileName: str, versionId: str, client):
     try :
         print("Start Generating Gans Method")
->>>>>>> 39b4f0fb7038c2a070615acf696ec5251082fa31
 
         data = client.get_image_file("raw", fileName, versionId)
 
@@ -18,19 +14,6 @@ def generate_gans(weights: str, fileName: str, versionId: str, client):
         lr_img = np.array(img)
 
         rrdn = RRDN(weights=weights)
-
-<<<<<<< HEAD
-    image.save("results/gan/"+"gans_"+fileName)
-    print("Resolution Finished: {}".format(fileName))
-    
-    # new_version_id = client.upload_visualize_file(
-    #     "resolution",
-    #     "gans_"+fileName,
-    #     "results/gan/"+"gans_"+fileName,
-    # )
-
-    return "gans_"+fileName
-=======
         sr_img = rrdn.predict(lr_img)
         image = Image.fromarray(sr_img)
 
@@ -95,4 +78,4 @@ def generate_video_gans(fileName: str, weights: str):
         return e
 
 generate_video_gans("video/video.mp4", "gans")
->>>>>>> 39b4f0fb7038c2a070615acf696ec5251082fa31
+
