@@ -47,40 +47,37 @@ def generate_video_psnr(fileName: str, weights: str):
         cap = cv2.VideoCapture(fileName)
 
         fps = int(cap.get(cv2.CAP_PROP_FPS))
-        fourcc = int(cap.get(cv2.CAP_PROP_FOURCC))
-        w = round(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
-        h = round(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
+        # fourcc = int(cap.get(cv2.CAP_PROP_FOURCC))
+        fourcc = cv2.VideoWriter_fourcc(*'MP4V')
+        # w = round(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
+        # h = round(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
 
-        writer = cv2.VideoWriter("video_results/"+weights+"_"+fileName+"_sred.mp4", fourcc=fourcc, fps=fps, frameSize=(w, h))
+        writer = cv2.VideoWriter("video_results/"+weights+"_"+fileName+"_sred.mp4", fourcc=fourcc, fps=fps, frameSize=(1024, 1024))
      
-
-        while cap.isOpened():
-            with pqdm(total=100) as bar:
-                success, frame = cap.read()
-    
-                print("Start Generating Gans Method")
-                
-                if not success:
-                    print("Capture not opened")
-
-                lr_frame = np.array(frame)
-
-                sr_img = rdn.predict(lr_frame)
-                # resized = cv2.resize(sr_img, frame_size)
-                # image = Image.fromarray(sr_img)
-                
-                # image.save("/app/results/gan/"+"gans_"+fileName)
-
-                print("Resolution Finished: {}".format(fileName))
-                bar.update(fps*5)
-
-                writer.write(sr_img.astype(np.uint8))
-                cv2.imshow('Frame', sr_img.astype(np.uint8))
+        print("Start Generating PSLR Method")
             
-                # Press Q on keyboard to  exit
-                if cv2.waitKey(25) & 0xFF == ord('q'):
-                    break
+        while cap.isOpened():
+            success, frame = cap.read()
 
+            if not success:
+                print("Capture not opened")
+
+            lr_frame = np.array(frame)
+
+            sr_img = rdn.predict(lr_frame)
+            # resized = cv2.resize(sr_img, frame_size)
+            # image = Image.fromarray(sr_img)
+            
+            # image.save("/app/results/gan/"+"gans_"+fileName)
+            
+            writer.write(sr_img.astype(np.uint8))
+            cv2.imshow('Frame', sr_img.astype(np.uint8))
+        
+            # Press Q on keyboard to  exit
+            if cv2.waitKey(25) & 0xFF == ord('q'):
+                writer.write(sr_img.astype(np.uint8))
+                break
+        print("Resolution Finished: {}".format(fileName))
         cap.release()
 
         return weights+"_"+fileName

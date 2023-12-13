@@ -41,16 +41,13 @@ def generate_video_gans(fileName: str, weights: str):
         cap = cv2.VideoCapture(fileName)
 
         fps = int(cap.get(cv2.CAP_PROP_FPS))
-        fourcc = int(cap.get(cv2.CAP_PROP_FOURCC))
-        w = round(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
-        h = round(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
+        fourcc = cv2.VideoWriter_fourcc(*'MP4V')
+        # w = round(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
+        # h = round(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
 
-        writer = cv2.VideoWriter("video_results/"+"gans_"+fileName+"_sred", fourcc=fourcc, fps=fps, frameSize=(w, h))
+        writer = cv2.VideoWriter("video_results/"+"gans_"+fileName+"_sred", fourcc=fourcc, fps=fps, frameSize=(1024, 1024))
 
-        print(weights)
         while cap.isOpened():
-
-            print(w)
             success, frame = cap.read()
             print("Start Generating Gans Method")
             
@@ -59,13 +56,11 @@ def generate_video_gans(fileName: str, weights: str):
 
             lr_frame = np.array(frame)
 
-            sr_img = rrdn.predict(frame)
+            sr_img = rrdn.predict(lr_frame)
             # resized = cv2.resize(sr_img, frame_size)
             # image = Image.fromarray(sr_img)
             
             # image.save("/app/results/gan/"+"gans_"+fileName)
-
-            print("Resolution Finished: {}".format(fileName))
             
             writer.write(sr_img.astype(np.uint8))
             cv2.imshow('Frame', sr_img.astype(np.uint8))
@@ -73,7 +68,7 @@ def generate_video_gans(fileName: str, weights: str):
             # Press Q on keyboard to  exit
             if cv2.waitKey(25) & 0xFF == ord('q'):
                 break
-
+        print("Resolution Finished: {}".format(fileName))
         cap.release()
 
         return "gans_"+fileName
