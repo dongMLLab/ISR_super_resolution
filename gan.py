@@ -3,7 +3,7 @@ import numpy as np
 from PIL import Image
 import os
 
-def generate_gans(weights: str, fileName: str, client):
+def generate_gans(weights: str, fileName: str):
 
 # /00037-3574770352.jpg
     img = Image.open('./img/'+fileName)
@@ -18,10 +18,10 @@ def generate_gans(weights: str, fileName: str, client):
     image.save("results/gan/"+"gans_"+fileName)
     print("Resolution Finished: {}".format(fileName))
     
-    new_version_id = client.upload_visualize_file(
-        "resolution",
-        "gans_"+fileName,
-        "results/gan/"+"gans_"+fileName,
-    )
+    # new_version_id = client.upload_visualize_file(
+    #     "resolution",
+    #     "gans_"+fileName,
+    #     "results/gan/"+"gans_"+fileName,
+    # )
 
-    return "gans_"+fileName, new_version_id
+    return "gans_"+fileName

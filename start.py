@@ -1,8 +1,22 @@
 import os
+# from client import MinioClient
 
 from gan import generate_gans
 from psnr import generate_psnr
 
+
+# minio_endpoint = os.environ.get("MINIO_ENDPOINT")
+# minio_access = os.environ.get("MINIO_ACCESSKEY")
+# minio_secret = os.environ.get("MINIO_SECRET")
+
+# print("minio_scret: {}".format(minio_secret))
+# print("Endpoint: {}".format(minio_endpoint))
+
+# client = MinioClient(
+#     minio_endpoint,
+#     minio_access,
+#     minio_secret
+# )
 
 def start():
     usable_weights = ['psnr-large', 'psnr-small', 'noise-cancel', 'gans']
