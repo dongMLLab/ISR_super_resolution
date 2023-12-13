@@ -6,3 +6,5 @@ tensorflow==2.15.0
 h5py==3.10.0
 minio==7.1.16
 python-dotenv==1.0.0
+opencv-python==4.8.1.78
+pqdm==0.2.0

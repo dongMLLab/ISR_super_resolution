@@ -1,6 +1,7 @@
 from ISR.models import RRDN
 import numpy as np
 from PIL import Image
+import cv2
 
 def generate_gans(weights: str, fileName: str, versionId: str, client):
     try :
@@ -35,17 +36,21 @@ def generate_gans(weights: str, fileName: str, versionId: str, client):
 
 def generate_video_gans(fileName: str, weights: str):
     try :
-        import cv2
-
+        rrdn = RRDN(weights=weights)
+        print(fileName)
         cap = cv2.VideoCapture(fileName)
 
-        while cap.isOpened():
-            fps = int(cap.get(cv2.CAP_PROP_FPS))
-            fourcc = int(cap.get(cv2.CAP_PROP_FOURCC))
-            w = round(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
-            h = round(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
+        fps = int(cap.get(cv2.CAP_PROP_FPS))
+        fourcc = int(cap.get(cv2.CAP_PROP_FOURCC))
+        w = round(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
+        h = round(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
 
-            writer = cv2.VideoWriter("video_results/"+fileName+"_sred", fourcc=fourcc, fps=fps, frameSize=(w, h))
+        writer = cv2.VideoWriter("video_results/"+"gans_"+fileName+"_sred", fourcc=fourcc, fps=fps, frameSize=(w, h))
+
+        print(weights)
+        while cap.isOpened():
+
+            print(w)
             success, frame = cap.read()
             print("Start Generating Gans Method")
             
@@ -54,21 +59,21 @@ def generate_video_gans(fileName: str, weights: str):
 
             lr_frame = np.array(frame)
 
-            rrdn = RRDN(weights=weights)
-
-            sr_img = rrdn.predict(lr_frame)
-            image = Image.fromarray(sr_img)
+            sr_img = rrdn.predict(frame)
+            # resized = cv2.resize(sr_img, frame_size)
+            # image = Image.fromarray(sr_img)
             
             # image.save("/app/results/gan/"+"gans_"+fileName)
 
             print("Resolution Finished: {}".format(fileName))
             
-            writer.write(image)
-            cv2.imshow('Frame', image)
-
+            writer.write(sr_img.astype(np.uint8))
+            cv2.imshow('Frame', sr_img.astype(np.uint8))
+        
             # Press Q on keyboard to  exit
             if cv2.waitKey(25) & 0xFF == ord('q'):
                 break
+
         cap.release()
 
         return "gans_"+fileName

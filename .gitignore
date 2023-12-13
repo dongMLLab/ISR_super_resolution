@@ -9,3 +9,4 @@ __pycache__
 .env
 run.sh
 *.mp4
+*.hdf5
