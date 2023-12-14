@@ -1,8 +1,8 @@
 import os
 # from client import MinioClient
 
-from gan import generate_gans
-from psnr import generate_psnr
+from gan import generate_gans, generate_video_gans
+from psnr import generate_psnr, generate_video_psnr
 import cv2
 
 # minio_endpoint = os.environ.get("MINIO_ENDPOINT")
@@ -61,10 +61,10 @@ def start():
 
             if v[-2:]:
                 if weights == "gans":
-                    generate_gans(weights, i)
+                    generate_video_gans(weights, i)
                 
                 else:
-                    generate_psnr(weights, i)
+                    generate_video_psnr(weights, i)
             
             else:
                 print("Pass")
