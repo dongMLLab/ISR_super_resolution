@@ -32,8 +32,8 @@ def start():
         image_dir = os.listdir("./img")
 
         for i in image_dir:
-            print(i[-2:])
-        # /00037-3574770352.jpg
+            print("Image Mode Selected. Proceed File: {}".format(i[-2:]))
+
             if i[-2:] == "md":
                 print("Pass Not Image file: {}".format(i[-2:]))
                 pass
@@ -52,9 +52,8 @@ def start():
         video_dir = os.listdir("./video")
 
         for v in video_dir:
-            print(v[-2:])
+            print("Video Mode Selected. Proceed File: {}".format(v[-2:]))
 
-            # /00037-3574770352.jpg
             if v[-2:] == "md":
                 print("Pass Not Image file: {}".format(i[-2:]))
                 pass
