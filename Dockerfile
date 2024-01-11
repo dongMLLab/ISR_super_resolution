@@ -2,7 +2,7 @@ FROM tiangolo/uvicorn-gunicorn-fastapi:python3.9-slim
 
 WORKDIR /app
 
-RUN pip3 install 'poetry==1.6.1' 'dulwich==0.21.5'
+RUN pip3 install "poetry==1.7.1" 'dulwich==0.21.5'
 
 COPY . /app
 
